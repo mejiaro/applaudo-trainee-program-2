@@ -26,34 +26,34 @@ while op.to_i!=5 do
   puts "\nType the number of the option:"
   op= gets.chomp
   case op.to_i
-  when 1
-    puts "Type the number you like to add to the array"
-    num=gets.chomp
-    begin
-    num = Integer(num)
-    arr << num
-    puts "Number added correctly"
-    rescue ArgumentError, TypeError
-    puts "Type a valid number"
-    end
-  when 2
-    if arr.length==0
-      puts "The array is empty"
+    when 1
+      puts "Type the number you like to add to the array"
+      num=gets.chomp
+      begin
+        num = Integer(num)
+        arr << num
+        puts "Number added correctly"
+      rescue ArgumentError, TypeError
+        puts "Type a valid number"
+      end
+    when 2
+      if arr.length==0
+        puts "The array is empty"
+      else
+        puts "The array is: #{arr}"
+      end
+    when 3
+      arr.to_histogram
+    when 4
+      puts "Are you sure you want to erase the array? (S/N)"
+      q=gets.chomp
+      if(q.downcase=="s")
+        arr.clear
+        puts "Array eliminated"
+      end
+    when 5
+      puts "Leaving the program..."
     else
-      puts "The array is: #{arr}"
-    end
-  when 3
-    arr.to_histogram
-  when 4
-    puts "Are you sure you want to erase the array? (S/N)"
-    q=gets.chomp
-    if(q.downcase=="s")
-      arr.clear
-      puts "Array eliminated"
-    end
-  when 5
-    puts "Leaving the program..."
-  else
-    puts "The option is not valid"
+      puts "The option is not valid"
   end
 end

@@ -19,6 +19,6 @@ begin
     else
       puts "The number of repetitions is too high"
     end
-  rescue ArgumentError, TypeError
+rescue ArgumentError, TypeError
     puts "Type a valid number"
 end
