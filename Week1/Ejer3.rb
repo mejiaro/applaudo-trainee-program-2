@@ -8,25 +8,25 @@ def mean(array)
   end
 end
 
-def median(array)
+def mode(array)
   if(array.length==0)
     puts "The array is empty"
   else
     h = array.each_with_object(Hash.new(0)) {|word, hash| hash[word] += 1}
-    puts "Median is #{h.key(h.values.max).to_s}"
+    puts "Mode is #{h.key(h.values.max).to_s}"
   end
 end
 
-def mode(array)
+def median(array)
   mo=array.length
   if(mo==0)
     puts "The array is empty"
   else
     array.sort! { |a, b| a <=> b }
     if(mo%2==0)
-      puts "Mode is #{(array[mo/2]+array[(mo/2)-1]).to_f/2}"
+      puts "Median is #{(array[mo/2]+array[(mo/2)-1]).to_f/2}"
     else
-      puts "Mode is #{array[mo/2]}"
+      puts "Median is #{array[mo/2]}"
     end
   end
 end
