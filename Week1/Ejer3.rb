@@ -79,11 +79,13 @@ while op.to_i!=8 do
       median(arr)
       mode(arr)
     when 7
-      puts "Are you sure you want to erase the array? (S/N)"
+      puts "Are you sure you want to clear the array? (S/N)"
       q=gets.chomp
       if(q.downcase=="s")
         arr.clear
-        puts "Array eliminated"
+        puts "Array cleared"
+      else
+        puts "The array was not cleared"
       end
     when 8
       puts "Leaving the program..."

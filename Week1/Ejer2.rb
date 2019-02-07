@@ -45,11 +45,13 @@ while op.to_i!=5 do
     when 3
       arr.to_histogram
     when 4
-      puts "Are you sure you want to erase the array? (S/N)"
+      puts "Are you sure you want to clear the array? (S/N)"
       q=gets.chomp
       if(q.downcase=="s")
         arr.clear
-        puts "Array eliminated"
+        puts "Array cleared"
+      else
+        puts "The array was not cleared"
       end
     when 5
       puts "Leaving the program..."
