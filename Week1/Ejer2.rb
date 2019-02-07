@@ -12,7 +12,7 @@ end
 arr = []
 op = 0
 36.times { print '-' }
-puts "\n|              Problem 3           |"
+puts "\n|              Problem 2           |"
 while op.to_i != 5
   36.times { print '-' }
   puts "\n|               Menu               |"
