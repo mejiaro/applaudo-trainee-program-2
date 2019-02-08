@@ -92,4 +92,6 @@ while op.to_i != 8
   else
     puts 'The option is not valid'
   end
+  sleep(1)
+  system("clear")
 end

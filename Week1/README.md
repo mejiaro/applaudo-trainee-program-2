@@ -1,8 +1,10 @@
 Problem 1
 When the program start shows the title just like this:
+```
 -------------------------
 |     Problem 1         |
 -------------------------
+```
 
 then ask for the number of repetitions and evaluates after the person puts
 the the character if is a number if is not then shows a message to the person
@@ -14,6 +16,7 @@ Problem 2
 
 When the program starts shows a menu like this and ask the person to type the number
 of option
+```
 ------------------------------------
 |              Problem 2           |
 ------------------------------------
@@ -24,6 +27,7 @@ of option
 | 4.Clear the array                |
 | 5.Exit                           |
 ------------------------------------
+```
 Options:
 
 1. Ask the person for a number and then add it to the array
@@ -36,6 +40,10 @@ of the items in the array and print the result
 
 
 Problem 3
+
+When the program starts shows a menu like this and ask the person to type the number
+of option
+```
 ------------------------------------
 |              Problem 3           |
 ------------------------------------
@@ -50,3 +58,17 @@ Problem 3
 | 7.Clear the array                |
 | 8.Exit                           |
 ------------------------------------
+```
+
+1. Ask the person for a number and then add it to the array
+2. Prints the whole array, if the array is empty then print "the array is empty"
+3. First check if the array is empty, if is not then proceed to calculate the mean and
+print the result
+4. First check if the array is empty, if is not then proceed to calculate the median and
+print the result
+5. First check if the array is empty, if is not then proceed to calculate the mode and
+print the result
+6. Invoke the 3 methods (mean, mode and median) and print the result
+7. Ask the person if is sure that want to delete the array, if the person type the letter
+"s" or "S" then proceed to clear the array
+8. Shows the message that is leaving the program
