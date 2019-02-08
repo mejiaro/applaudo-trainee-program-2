@@ -1,4 +1,5 @@
-Problem 1
+**Problem 1**
+
 When the program start shows the title just like this:
 ```
 -------------------------
@@ -12,7 +13,7 @@ that the input is not valid
 If is a number then multiply the letter "z" by the number and then shows a message
 with all the results
 
-Problem 2
+**Problem 2**
 
 When the program starts shows a menu like this and ask the person to type the number
 of option
@@ -39,7 +40,7 @@ of the items in the array and print the result
 5. Shows the message that is leaving the program
 
 
-Problem 3
+**Problem 3**
 
 When the program starts shows a menu like this and ask the person to type the number
 of option
