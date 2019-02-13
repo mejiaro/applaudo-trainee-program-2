@@ -6,7 +6,6 @@ def goodFileCreation(dates, name)
     dates.each_with_index do |val, index|
       if index.odd?
         csv.puts val.to_s
-=======
 def goodFileCreation(dates,name)
   File.open("#{name}.csv", 'w') do |csv|
     dates.each_with_index do |val, index|
@@ -25,7 +24,6 @@ def wrongFileCreation(dates, name)
   File.open("#{name}.csv", 'w') do |csv|
     (0...dates.length).step(3).each do |index|
       csv.puts "#{dates[index]}, #{dates[index + 1]},#{dates[index + 2]}"
-=======
 def wrongFileCreation(dates,name)
   File.open("#{name}.csv", 'w') do |csv|
     (0...dates.length).step(3).each do |index|
@@ -77,9 +75,8 @@ rescue Exception => msg
   puts "Exception Backtrace: #{msg.backtrace}"
  end
 
-<<<<<<< HEAD
-goodFileCreation(goodDate, 'GoodDate')
-wrongFileCreation(badDate, 'BadDate')
+ goodFileCreation(goodDate,"GoodDate")
+ wrongFileCreation(badDate,"BadDate")
 =======
  goodFileCreation(goodDate,"GoodDate")
  wrongFileCreation(badDate,"BadDate")
