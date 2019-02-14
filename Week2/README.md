@@ -17,6 +17,7 @@ proceed to ask them again
 This reads the file and validates if is a valid date or not, the date use the format '%d/%m/%Y %H:%M:%S' but I added the `CST` to especify the time zone where El Salvador is, and then proceed to get the time of `EST` with `getlocal('-05:00')`, -05:00 is for the EST zone, if this process is successful  then added the date to an array of god dates if not then added the date, the event and the line number to an array of bad dates, later proceeds to print a description of the lines where are invalid dates.
 
  **goodFileCreation Method**
+ 
  This method gets the array of the valid dates and the name of the output file,
  is responsible for ordering the array by date and to write the file and a graphic
  like this were the percentages are written vertically:
