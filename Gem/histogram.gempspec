@@ -1,0 +1,10 @@
+Gem::Specification.new do |s|
+  s.name        = 'Histogram'
+  s.version     = '1.0.0'
+  s.date        = '2019-02-15'
+  s.summary     = "Histogram of array"
+  s.description = "A gem that calculates the histogram of array"
+  s.authors     = ["Carlos Medrano"]
+  s.email       = 'cemg_neto@hotmail.com'
+  s.files       = ["lib/histogram.rb"]
+end
