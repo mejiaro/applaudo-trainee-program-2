@@ -1,17 +1,15 @@
 require 'securerandom'
 
 class Vehicle
-  attr_accessor :color, :brand, :model,:price, :id, :wheels
-  def initialize(color, brand, model, price)
+  attr_accessor :color, :brand, :price, :id, :wheels
+  def initialize(color, brand, price)
     @color = color
     @brand = brand
-    @model = model
-    @price = price
-    @@array = []
+    @price = price.to_f
     @id = SecureRandom.hex
   end
 
-  def self.array
-    @@array ||=[]
+  def self.vehicles_array
+    @@vehicles_array ||=[]
   end
 end
