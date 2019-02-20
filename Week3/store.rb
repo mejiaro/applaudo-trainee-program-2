@@ -30,8 +30,8 @@ class Store
 
   def print_vehicles
     36.times { print '-' }
-    vehicles.each_with_index do |l,index|
-      puts "#{index+1}."
+    vehicles.each_with_index do |l, index|
+      puts "#{index + 1}."
       if l.wheels > 4
         puts "\tType:  Truck"
       else
@@ -43,7 +43,7 @@ class Store
       puts "\t\tWheels: #{l.wheels}"
       puts "\t\tPrice: $#{l.price}"
       36.times { print '-' }
-      puts ""
+      puts ''
     end
   end
 
@@ -51,32 +51,36 @@ class Store
     36.times { print '-' }
     puts "\n|\t\tEXTRAS:            |"
     36.times { print '-' }
-    puts ""
-    Extras.extras_array.each do |l|
-      puts "|\t#{l.extra} ($#{l.price})"
+    puts ''
+    Extras.extras_array.each_with_index do |l, index|
+      puts "|\t#{index + 1}.- #{l.extra} ($#{l.price})"
     end
     36.times { print '-' }
     puts
   end
 
-  def print_details(vehicle, extras=[])
+  def print_details(vehicle, extras = [])
     total = 0.0
-    puts "Detail:"
+    puts 'Detail:'
     puts "\t\tQuote for the car:  #{vehicle.id}"
     puts "\t\tFeatures"
     puts "\t\tColor: #{vehicle.color}"
     puts "\t\tBrand: #{vehicle.brand}"
     puts "\t\tWheels: #{vehicle.wheels}"
     puts "\t\tPrice: $#{vehicle.price}"
-    total +=vehicle.price
+    total += vehicle.price
     40.times { print '-' }
-    puts ""
-    extras.each do |l|
-      puts "\t\t#{l.extra} ($#{l.price})"
-      total += l.price
+    puts ''
+    if extras.length>0
+      extras.each do |l|
+        puts "\t\t#{l.extra} ($#{l.price})"
+        total += l.price
+      end
+    else
+      puts "\t\tNo extras selected"
     end
+
     40.times { print '-' }
     puts "\n\t\tTotal: $#{total}"
   end
-
 end
