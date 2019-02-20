@@ -13,11 +13,12 @@ wheels = 0
 vehicle_number = 0
 vehicle_option = 0
 list = ''
+q=''
 @store = Store.new(Vehicle.vehicles_array)
 def get_extras(array_select)
   array_select.uniq.each do |l|
     begin
-      if l.to_i > 0 && l.to_i < Extras.extras_array
+      if l.to_i > 0 && l.to_i <= Extras.extras_array.length
         @extras_list << Extras.extras_array[l.to_i - 1]
       end
     rescue ArgumentError => e
@@ -49,7 +50,6 @@ end
 
 def safe(proc)
   proc.call
-  puts 'Vehicle added correctly'
 rescue ArgumentError => e
   puts e.backtrace
   puts e.message
@@ -90,13 +90,21 @@ while op.to_i != 6
       safe(proc { new_car(color, brand, price) })
     end
   when 2
-    if Vehicle.vehicles_array.empty?
+    if @store.vehicles.empty?
       puts 'There are no vehicles to delete'
     else
       puts 'Type the number of the vehicle'
       vehicle_number = gets.chomp
       if vehicle_number.to_i > 0
-        @store.delete_vehicle(Vehicle.vehicles_array[(vehicle_number.to_i - 1)])
+        puts 'Are you sure you want to delete the vehicle? (S/N)'
+        q = gets.chomp
+        if q.casecmp('s').zero?
+          @store.delete_vehicle(@store.vehicles[(vehicle_number.to_i - 1)])
+          puts 'The vehicle was deleted'
+        else
+          puts 'The vehicle was not deleted'
+        end
+
       else
         puts 'The number of the vehicle is not valid'
       end
@@ -112,11 +120,11 @@ while op.to_i != 6
   when 5
     puts 'Type the number of the vehicle'
     vehicle_number = gets.chomp
-    if vehicle_number.to_i > 0 && vehicle_number.to_i < @store.vehicles.length
+    if vehicle_number.to_i > 0 && vehicle_number.to_i <= @store.vehicles.length
       puts 'Type the numbers of extras separated by ,'
       list = gets.chomp
       get_extras(list.split(','))
-      @store.print_details(Vehicle.vehicles_array[vehicle_number.to_i - 1], @extras_list)
+      @store.print_details(@store.vehicles[vehicle_number.to_i - 1], @extras_list)
       puts 'Press any key to continue'
       gets.chomp
     else
