@@ -27,5 +27,10 @@ Wheels
 Price
 4. Prints the list of all extras like this:
 Extra ($Price)
+<<<<<<< HEAD
 5. First ask the person the autoincrementable number of the vehicle, if there is
 a car with that number then proceed to ask the person for the number of the extras, the person has to type the number of the extras separated by , .
+=======
+5. Firs ask the person the autoincrementable number of the vehicle, if there is
+a car with that number then proceed to ask the person for the number of the extras, the person has to type the number of the extras separated by , . 
+>>>>>>> 45e3b5b8700ac7e96677be0fa7a6afc08c466605
