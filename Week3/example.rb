@@ -12,7 +12,7 @@ wheels = 0
 vehicle_number = 0
 list = ''
 q=''
-@store = Store.new([Car.vehicles_array,Truck.vehicles_array].flatten)
+@store = Store.new(Vehicle.vehicles_array)
 def get_extras(array_select)
   array_select.uniq.each do |l|
     begin
