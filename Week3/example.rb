@@ -4,14 +4,12 @@ require_relative 'truck'
 require_relative 'store'
 require_relative 'extras'
 
-selected_extras = []
 @extras_list = []
 color = ''
 price = 0
 brand = ''
 wheels = 0
 vehicle_number = 0
-vehicle_option = 0
 list = ''
 q=''
 @store = Store.new(Vehicle.vehicles_array)
