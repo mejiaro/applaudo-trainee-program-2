@@ -43,7 +43,7 @@ def new_truck(color, brand, price, wheels)
   price = Float(price)
   t = Truck.new(color, brand, price)
   t.wheels = wheels
-  store.add_vehicle(t)
+  @store.add_vehicle(t)
 end
 
 def safe(proc)

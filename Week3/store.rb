@@ -3,8 +3,7 @@ require_relative 'extras'
 
 class Store
   def initialize(array_vehicle)
-    @vehicles = []
-    @vehicles.replace(array_vehicle)
+    @vehicles = array_vehicle
   end
 
   def vehicles
@@ -30,18 +29,19 @@ class Store
 
   def print_vehicles
     36.times { print '-' }
+    puts
     vehicles.each_with_index do |l, index|
-      puts "#{index + 1}."
-      if l.wheels > 4
+      print "#{index + 1}."
+      if l.wheels.to_i > 4
         puts "\tType:  Truck"
       else
         puts "\tType:  Car"
       end
       puts "\t\tFeatures"
       puts "\t\tColor: #{l.color}"
-      puts "\t\ttBrand: #{l.brand}"
+      puts "\t\tBrand: #{l.brand}"
       puts "\t\tWheels: #{l.wheels}"
-      puts "\t\tPrice: $#{sprintf('%.2f', l.price)}"
+      puts "\t\tPrice: $#{format('%.2f', l.price)}"
       36.times { print '-' }
       puts ''
     end
@@ -53,7 +53,7 @@ class Store
     36.times { print '-' }
     puts ''
     Extras.extras_array.each_with_index do |l, index|
-      puts "|\t#{index + 1}.- #{l.extra} ($#{sprintf('%.2f', l.price)})"
+      puts "|\t#{index + 1}.- #{l.extra} ($#{format('%.2f', l.price)})"
     end
     36.times { print '-' }
     puts
@@ -68,13 +68,13 @@ class Store
     puts "\tColor: #{vehicle.color}"
     puts "\tBrand: #{vehicle.brand}"
     puts "\tWheels: #{vehicle.wheels}"
-    puts "\tPrice: $#{sprintf('%.2f', vehicle.price)}"
+    puts "\tPrice: $#{format('%.2f', vehicle.price)}"
     total += vehicle.price
     40.times { print '-' }
     puts ''
-    if extras.length>0
+    if !extras.empty?
       extras.each do |l|
-        puts "\t#{l.extra} ($#{sprintf('%.2f', l.price)})"
+        puts "\t#{l.extra} ($#{format('%.2f', l.price)})"
         total += l.price
       end
     else
@@ -82,6 +82,6 @@ class Store
     end
 
     40.times { print '-' }
-    puts "\n\tTotal: $#{sprintf('%.2f', total)}"
+    puts "\n\tTotal: $#{format('%.2f', total)}"
   end
 end
