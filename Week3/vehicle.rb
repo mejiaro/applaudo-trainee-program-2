@@ -10,7 +10,7 @@ class Vehicle
   end
 
   def self.vehicles_array
-    @@vehicles_array ||=[]
+    @vehicles_array ||=[]
   end
 
 def self.imports_cars(color,brand,price)
