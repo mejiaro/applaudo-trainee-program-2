@@ -10,10 +10,5 @@ class Truck < Vehicle
   truck_brand = ['MAN', 'DAF', 'Iveco', 'Mercedez Benz', 'Volvo']
   truck_price = [80_000, 75_000, 78_000, 90_000, 95_000]
   truck_wheels = [8, 12, 12, 10, 4]
-
-  (0...truck_color.length).each do |index|
-    t = self.new(truck_color[index], truck_brand[index],truck_price[index])
-    t.wheels = truck_wheels[index]
-    vehicles_array << t
-  end
+  imports_trucks(truck_color, truck_brand, truck_price, truck_wheels)
 end

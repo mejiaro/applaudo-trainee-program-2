@@ -10,6 +10,22 @@ class Vehicle
   end
 
   def self.vehicles_array
-    @@vehicles_array ||=[]
+    @@vehicles_array ||= []
+  end
+
+  def self.imports_cars(color, brand, price)
+    (0...color.length).each do |index|
+      c = new(color[index], brand[index], price[index])
+      c.wheels
+      vehicles_array << c
+    end
+  end
+
+  def self.imports_trucks(color, brand, price, wheels)
+    (0...color.length).each do |index|
+      t = new(color[index], brand[index], price[index])
+      t.wheels = wheels[index]
+      vehicles_array << t
+    end
   end
 end
