@@ -8,7 +8,9 @@ class Simulations
   SIMULATIONS_COUNT = 5000
 
   def run_simulation(index = nil)
-    CorrectAnswerBehavior.new(index).correct_answer
+    answer = CorrectAnswerBehavior.new(index)
+    answer.correct_answer
+    puts answer.message
   end
 
   def capture_simulation_output(index)
