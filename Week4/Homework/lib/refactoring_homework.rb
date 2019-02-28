@@ -1,5 +1,3 @@
-# This is a simple refactoring exercise.
-#
 # What to do?
 #
 # 1. Look at the code of the class CorrectAnswerBehavior
@@ -26,57 +24,59 @@
 # You can find it at https://github.com/jbrains/trivia
 
 # ------------------------------ REFACTORING START ------------------------------
+require_relative 'out_to_string_redirector'
+# fds
 class CorrectAnswerBehavior
-
-  def was_correctly_answered
-    if @in_penalty_box[@current_player]
-      if @is_getting_out_of_penalty_box
-        puts "#{@players[@current_player]} got out of penalty box"
-        puts 'Answer was correct!!!!'
-        @purses[@current_player] += 1
-        puts "#{@players[@current_player]} now has #{@purses[@current_player]} Gold Coins."
-        winner = did_player_win()
-        @current_player += 1
-        @current_player = 0 if @current_player == @players.length
-        puts "Player is now #{@players[@current_player]}"
-        winner
-      else
-        puts "#{@players[@current_player]} stays in penalty box"
-        @current_player += 1
-        @current_player = 0 if @current_player == @players.length
-        puts "Player is now #{@players[@current_player]}"
-        true
-      end
-    else
-      puts "Answer was corrent!!!!"
+  def getting_out
+    if @is_getting_out_of_penalty_box
+      puts "#{@players[@current_player]} got out of penalty box \n Answer was correct!!!!"
       @purses[@current_player] += 1
       puts "#{@players[@current_player]} now has #{@purses[@current_player]} Gold Coins."
       winner = did_player_win
-      @current_player += 1
-      @current_player = 0 if @current_player == @players.length
-      puts "Player is now #{@players[@current_player]}"
-      return winner
+      winner
+    else
+      puts "#{@players[@current_player]} stays in penalty box"
+      true
     end
   end
-private
-  def did_player_win
-    !(@purses[@current_player] == 6)
+
+  def correct_answer
+    if @in_penalty_box[@current_player]
+      getting_out
+    else
+      puts 'Answer was correct!!!!'
+      @purses[@current_player] += 1
+      puts "#{@players[@current_player]} now has #{@purses[@current_player]} Gold Coins."
+      winner = did_player_win
+      winner
+    end
+    @current_player += 1
+    @current_player = 0 if @current_player == @players.length
+    puts "Player is now #{@players[@current_player]}"
   end
 
-# ------------------------------ REFACTORING END ------------------------------
+  private
 
-public
-  def initialize seed = nil
+  def did_player_win
+    @purses[@current_player] != 6
+  end
+
+  # ------------------------------ REFACTORING END ------------------------------
+
+  public
+
+  def initialize(seed = nil)
     srand(seed) if seed
     @players = %w[Alice Bob Cecil]
-    @purses = @players.map { rand(3) + 2 }
-    @in_penalty_box = @players.map { rand(2) == 0 }
+    @purses = @players.map { rand(2..4) }
+    @in_penalty_box = @players.map { rand(2).zero? }
     @current_player = rand(@players.count)
-    @is_getting_out_of_penalty_box = @in_penalty_box[@current_player] && rand(2) == 0
+    @is_getting_out_of_penalty_box = @in_penalty_box[@current_player] && rand(2).zero?
   end
 end
 
 require 'fileutils'
+# This module handle all the things related with paths
 module FixtureHandler
   def self.clear_fixtures
     FileUtils.rm_rf(fixtures_dir)
@@ -86,120 +86,53 @@ module FixtureHandler
     FileUtils.mkdir(fixtures_dir)
   end
 
-  def self.write_fixture index, text
-    File.open(fixture_path(index), "w") do |file|
+  # create a file that the given index is the title and the
+  def self.write_fixture(index, text)
+    File.open(fixture_path(index), 'w') do |file|
       file.write(text)
     end
   end
 
-  def self.fixture_exists? index
-    File.exists?(fixture_path(index))
+  # evaluate if the file with the given index exists
+  def self.fixture_exists?(index)
+    File.exist?(fixture_path(index))
   end
 
-  def self.read_fixture index
+  # read the file that his title is the same of the given number
+  def self.read_fixture(index)
     File.read(fixture_path(index))
   end
 
-  def self.fixture_path index
+  # Get the path of the file with the given number or index
+  def self.fixture_path(index)
     "#{fixtures_dir}/#{index}.txt"
   end
 
+  # Load the path of the project add the name of the folder that is goin
+  # to be create in the method create_fixture_dir
   def self.fixtures_dir
-    "#{File.expand_path(File.dirname(__FILE__))}/fixtures"
+    "#{__dir__}/fixtures"
   end
 end
 
-module StdOutToStringRedirector
-  require 'stringio'
-  def self.redirect_stdout_to_string
-    sio = StringIO.new
-    old_stdout, $stdout = $stdout, sio
-    yield
-    $stdout = old_stdout
-    sio.string
-  end
-end
-
-SIMULATIONS_COUNT = 5000
-def run_simulation index = nil
-  CorrectAnswerBehavior.new(index).was_correctly_answered
-end
-
-def capture_simulation_output index
-  StdOutToStringRedirector.redirect_stdout_to_string do
-    run_simulation(index)
-  end
-end
-
-def clean_fixtures
-  FixtureHandler.clear_fixtures
-end
-
-def record_fixtures
-  SIMULATIONS_COUNT.times do |index|
-    raise "You need to clean recorded simulation results first!" if FixtureHandler.fixture_exists?(index)
-  end
-  FixtureHandler.create_fixture_dir
-  SIMULATIONS_COUNT.times do |index|
-    FixtureHandler.write_fixture(index, capture_simulation_output(index))
-  end
-rescue RuntimeError => e
-  puts "ERROR!!!"
-  puts e.message
-end
-
-require 'test/unit/assertions'
-include Test::Unit::Assertions
-def test_output
-  SIMULATIONS_COUNT.times do |index|
-    raise "You need to record simulation results first!" unless FixtureHandler.fixture_exists?(index)
-    assert_equal(FixtureHandler.read_fixture(index), capture_simulation_output(index))
-  end
-  puts "OK."
-rescue RuntimeError => e
-  puts "ERROR!!!"
-  puts e.message
-end
-
+# method to read the given argument next to ruby File.rb
 case ARGV[0].to_s.downcase
-when "-h", "--help", "help"
-  puts "Usage:"
+when '-h', '--help', 'help'
+  puts 'Usage:'
   puts "  ruby #{__FILE__} [-h|--help|help]       - shows help screen."
   puts "  ruby #{__FILE__} [-c|--clean|clean]     - clean recorded results of simulation."
   puts "  ruby #{__FILE__} [-r|--record|record]   - records #{SIMULATIONS_COUNT} results of simulation."
   puts "  ruby #{__FILE__} [-t|--test|test]       - tests against #{SIMULATIONS_COUNT} recorded results of simulation."
   puts "  ruby #{__FILE__} <ANY_NUMBER>           - shows result of simulation initialized with <ANY_NUMBER>."
   puts "  ruby #{__FILE__}                        - shows result of random simulation."
-when "-c", "--clean", "clean"
+when '-c', '--clean', 'clean'
   clean_fixtures
-when "-r", "--record", "record"
+when '-r', '--record', 'record'
   record_fixtures
-when "-t", "--test", "test"
+when '-t', '--test', 'test'
   test_output
 when /\d(.\d+)?/
   run_simulation ARGV[0].to_f
 else
-  run_simulation
+  run_simulation nil
 end
-
-
-# Copyright © 2012 Michal Taszycki
-#
-# Permission is hereby granted, free of charge, to any person obtaining
-# a copy of this software and associated documentation files (the
-# "Software"), to deal in the Software without restriction, including
-# without limitation the rights to use, copy, modify, merge, publish,
-# distribute, sublicense, and/or sell copies of the Software, and to
-# permit persons to whom the Software is furnished to do so, subject to
-# the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
