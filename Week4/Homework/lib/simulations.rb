@@ -2,11 +2,12 @@ require 'test/unit/assertions'
 require_relative 'fixture_handler'
 require_relative 'correct_answer'
 require_relative 'out_to_string_redirector'
-# dsfas
+# class for the simulations of the trivia
 class Simulations
   include Test::Unit::Assertions
   SIMULATIONS_COUNT = 5000
 
+  # method that run a simulation of the program
   def run_simulation(index = nil)
     answer = CorrectAnswerBehavior.new(index)
     answer.correct_answer
@@ -19,6 +20,7 @@ class Simulations
     end
   end
 
+  # method that creates 4999 files with combinations of the simulation
   def record_fixtures
     SIMULATIONS_COUNT.times do |index|
       raise 'You need to clean recorded simulation results first!' if FixtureHandler.fixture_exists?(index)

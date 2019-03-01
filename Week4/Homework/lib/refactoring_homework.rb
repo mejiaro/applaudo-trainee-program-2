@@ -25,7 +25,7 @@
 
 # ------------------------------ REFACTORING START ------------------------------
 require_relative 'simulations'
-# method to read the given argument next to ruby File.rb
+# read the given argument next to ruby File.rb and evaluate it
 sim = Simulations.new
 case ARGV[0].to_s.downcase
 when '-h', '--help', 'help', '/?'

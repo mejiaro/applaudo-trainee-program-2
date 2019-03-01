@@ -23,7 +23,7 @@ class CorrectAnswerBehavior
     else
       @message << " #{@players[@current_player]} stays in penalty box\n"
       move_player
-      true
+      false
     end
   end
 
