@@ -37,3 +37,18 @@ describe CorrectAnswerBehavior do
     end
   end
 end
+describe CorrectAnswerBehavior do
+  not_static = CorrectAnswerBehavior.new
+  exec_method = not_static.correct_answer
+  describe '.getting_out not static' do
+    it 'evaluates if the player win' do
+      expect(exec_method).to eq(true)
+    end
+    it 'player is not more than 3' do
+      expect(not_static.current_player).to be < 3
+    end
+    it 'evaluate if the message is not empty' do
+      expect(not_static.message).to_not eq('')
+    end
+  end
+end
