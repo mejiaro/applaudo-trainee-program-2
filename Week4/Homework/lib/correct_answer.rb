@@ -1,4 +1,4 @@
-# fds
+# method that describe the actions of the trivia, it evaluate if the answer is correct or no
 class CorrectAnswerBehavior
   attr_accessor :players, :purses, :in_penalty_box, :current_player, :is_getting_out_of_penalty_box, :message
   def initialize(seed = nil)
@@ -11,6 +11,7 @@ class CorrectAnswerBehavior
     @mesage = []
   end
 
+  # method that describe if the player stays or leave the penalty box
   def getting_out
     @message = []
     if @is_getting_out_of_penalty_box
@@ -27,6 +28,7 @@ class CorrectAnswerBehavior
     end
   end
 
+  # method that evaluate if the answer is correct
   def correct_answer
     @message = []
     if @in_penalty_box[@current_player]
@@ -47,6 +49,7 @@ class CorrectAnswerBehavior
     @purses[@current_player] != 6
   end
 
+  # method that icrease the current player and print who is the new player
   def move_player
     @current_player += 1
     @current_player = 0 if @current_player == @players.length

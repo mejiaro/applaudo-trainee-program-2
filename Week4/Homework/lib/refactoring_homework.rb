@@ -30,7 +30,7 @@ sim = Simulations.new
 case ARGV[0].to_s.downcase
 when '-h', '--help', 'help', '/?'
   puts "Usage: ruby #{__FILE__} "
-  puts '                  [-h,--help,help] [-c,--clean,clean]'
+  puts '                  [-h,--help,help, /?] [-c,--clean,clean]'
   puts '                  [-t,--test,test] [Any_Number] [-r,--record,record]'
   puts 'Options:'
   puts '-h, --help, help     =>shows help screen'

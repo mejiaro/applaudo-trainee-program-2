@@ -1,6 +1,6 @@
 require 'stringio'
 require 'test/unit/assertions'
-# Module that test the io
+# Module that redirect the stoud of the files to string
 module StdOutToStringRedirector
   def self.redirect_stdout_to_string
     sio = StringIO.new

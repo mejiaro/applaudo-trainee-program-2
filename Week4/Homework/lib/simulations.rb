@@ -23,11 +23,11 @@ class Simulations
   # method that creates 4999 files with combinations of the simulation
   def record_fixtures
     SIMULATIONS_COUNT.times do |index|
-      raise 'You need to clean recorded simulation results first!' if FixtureHandler.fixture_exists?(index)
+      raise 'You need to clean recorded simulation results first!' if FixtureHandler.fixture_exists?(index + 1)
     end
     FixtureHandler.create_fixture_dir
     SIMULATIONS_COUNT.times do |index|
-      FixtureHandler.write_fixture(index, capture_simulation_output(index))
+      FixtureHandler.write_fixture(index + 1, capture_simulation_output(index))
     end
   rescue RuntimeError => e
     puts 'ERROR!!!'
@@ -36,8 +36,8 @@ class Simulations
 
   def test_output
     SIMULATIONS_COUNT.times do |index|
-      raise 'You need to record simulation results first!' unless FixtureHandler.fixture_exists?(index)
-      assert_equal(FixtureHandler.read_fixture(index), capture_simulation_output(index))
+      raise 'You need to record simulation results first!' unless FixtureHandler.fixture_exists?(index + 1)
+      assert_equal(FixtureHandler.read_fixture(index + 1), capture_simulation_output(index))
     end
     puts 'OK.'
   rescue RuntimeError => e
