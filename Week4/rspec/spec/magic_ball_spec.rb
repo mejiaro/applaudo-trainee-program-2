@@ -3,7 +3,7 @@ describe MagicBall do
   describe '.ask' do
     context 'ask returns an answer' do
       it 'returns an answer' do
-        expect( MagicBall::ANSWERS).to include(MagicBall.ask('Is Minitest awesome?'))
+        expect(MagicBall::ANSWERS).to include(MagicBall.ask('Is Minitest awesome?'))
       end
     end
   end
@@ -23,7 +23,7 @@ describe MagicBall do
   describe '.ask' do
     context 'answer is not empty' do
       it 'returns if answer is not empty' do
-        expect(MagicBall::ANSWERS).not_to eql("")
+        expect(MagicBall::ANSWERS).not_to eql('')
       end
     end
   end
