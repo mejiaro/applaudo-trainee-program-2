@@ -46,6 +46,8 @@ def new_truck(color, brand, price, wheels)
   @store.add_vehicle(t)
 end
 
+# this method is too messy. I understand your intention but you should've at least created one method for each
+# case and call that instead of doing this. Kinda like you did for steps 3 and 4.
 def safe(proc)
   proc.call
 rescue ArgumentError => e

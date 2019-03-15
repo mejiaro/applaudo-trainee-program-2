@@ -9,6 +9,7 @@ class Extras
     @extras_array ||= []
   end
 
+  # should've used a builder to create the extras. 
   def self.load_extras
     extras = ['Radio', 'AC', 'Sunroof', 'Leather seats', 'Power windows']
     price = [70, 450, 800, 1500, 600]

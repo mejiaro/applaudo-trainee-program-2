@@ -13,18 +13,19 @@ class Vehicle
     @vehicles_array ||=[]
   end
 
-def self.imports_cars(color,brand,price)
-  (0...color.length).each do |index|
-    c = self.new(color[index], brand[index], price[index])
-    c.wheels
-    Vehicle.vehicles_array << c
+  # shouldve used a builder for trucks and cars.
+  def self.imports_cars(color,brand,price)
+    (0...color.length).each do |index|
+      c = self.new(color[index], brand[index], price[index])
+      c.wheels
+      Vehicle.vehicles_array << c
+    end
   end
-end
-def self.imports_trucks(color,brand,price,wheels)
-  (0...color.length).each do |index|
-    t = self.new(color[index], brand[index], price[index])
-    t.wheels = wheels[index]
-    Vehicle.vehicles_array << t
+  def self.imports_trucks(color,brand,price,wheels)
+    (0...color.length).each do |index|
+      t = self.new(color[index], brand[index], price[index])
+      t.wheels = wheels[index]
+      Vehicle.vehicles_array << t
+    end
   end
-end
 end
